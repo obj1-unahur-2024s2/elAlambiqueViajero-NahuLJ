@@ -40,6 +40,7 @@ describe "group of tests" {
     luke.viajarA(lasVegas)
     assert.equals(480, alambiqueVeloz.combustible())
   }
+
   test "buenos aires debido al presidente actual su mate no tiene yerba"{
     assert.notThat(buenosAires.elRecuerdoTraeYerba())
   }
@@ -47,5 +48,18 @@ describe "group of tests" {
   test "si se cambia el presidente a milei el mate si trae yerba" {
     buenosAires.presidenteActual("milei")
     assert.that(buenosAires.elRecuerdoTraeYerba())
+  }
+
+  test "si luke viaja en el superConvertible nunca gasta combustible" {
+    luke.vehiculo(superConvertible)
+    luke.viajarA(buenosAires)
+    luke.viajarA(paris)
+    assert.equals(100000, superConvertible.combustible())
+  }
+
+  test "luke no puede viajar a manchester si su ultimo lugar es buenos aires" {
+    luke.viajarA(buenosAires)
+    luke.viajarA(manchester)
+    assert.equals("Mate", luke.ultimoRecuerdo())
   }
 }

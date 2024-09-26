@@ -47,3 +47,12 @@ object lasVegas {
 
     method combustible() = 120
 }
+
+object manchester {
+    
+    method recuerdo() = "Llavero del Manchester City"
+
+    method tieneRestriccion() = luke.ultimoRecuerdo() != "mate"
+
+    method combustible() = 300
+}
