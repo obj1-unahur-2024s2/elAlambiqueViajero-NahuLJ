@@ -67,13 +67,15 @@ object antiguallaBlindada {
 
 object superConvertible {
     var estaConvertido = false
-    var combustible = 100000
+    const combustible = 100000
 
     method estaConvertido() = estaConvertido
     
     method combustible() = combustible
     
-    method cambiarEstadoDeConvertido() = not estaConvertido
+    method cambiarEstadoDeConvertido(){
+        estaConvertido = not estaConvertido
+    }
 
     method gastarDeCombustibleCantidad(unaCantidad){
 
