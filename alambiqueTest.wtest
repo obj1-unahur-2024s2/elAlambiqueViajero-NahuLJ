@@ -1,9 +1,50 @@
 import alambique.*
-
+import lugares.*
 describe "group of tests" {
 
-  test "test 1" {
-    assert.equals(100, 50+50)
+  test "al inicio luke no tiene viajes" {
+    assert.equals(0, luke.cantidadLugares())
   }
 
+  test "al inicio luke viaja a paris y tiene como recuerdo un llavero de la torre effiel" {
+    luke.viajarA(paris)
+    assert.equals(paris.recuerdo(), luke.ultimoRecuerdo())
+  }
+
+  test "si luke viaja 5 veces a paris no puede viajar de nuevo"{
+    luke.viajarA(paris)
+    luke.viajarA(paris)
+    luke.viajarA(paris)
+    luke.viajarA(paris)
+    luke.viajarA(paris)
+    luke.viajarA(paris)
+    assert.equals(5, luke.cantidadLugares())
+  }
+
+  test "luke al viajar a buenos aires luego de paris, su ultimo recuerdo es un mate" {
+    luke.viajarA(paris)
+    luke.viajarA(buenosAires)
+    assert.equals(buenosAires.recuerdo(), luke.ultimoRecuerdo())
+  }
+
+  test "luke luego luego de ir a bagdad tiene como recuerdo un bidon de petroleo" {
+    luke.viajarA(bagdad)
+    assert.equals("Bidon de petroleo", bagdad.recuerdo())
+  }
+
+  test "el alambique luego de viajar 1 vez a cada ciudad termina con 480 de combustile"{
+    luke.viajarA(paris)
+    luke.viajarA(bagdad)
+    luke.viajarA(buenosAires)
+    luke.viajarA(lasVegas)
+    assert.equals(480, alambiqueVeloz.combustible())
+  }
+  test "buenos aires debido al presidente actual su mate no tiene yerba"{
+    assert.notThat(buenosAires.elRecuerdoTraeYerba())
+  }
+
+  test "si se cambia el presidente a milei el mate si trae yerba" {
+    buenosAires.presidenteActual("milei")
+    assert.that(buenosAires.elRecuerdoTraeYerba())
+  }
 }
