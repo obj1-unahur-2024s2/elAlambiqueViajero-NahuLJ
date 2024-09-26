@@ -1,4 +1,6 @@
 import alambique.*
+import recuerdos.*
+
 object paris {
 
     method recuerdo() = "Llavero de la torre effiel"
@@ -24,11 +26,12 @@ object buenosAires {
 }
 
 object bagdad {
-    var property anio = 1990 
+    var property anioActual = 1990 
+    const property recuerdos = [bidon, bomba, jardin]
     
-    method recuerdo() = self.recuerdoDelAnio(anio)
+    method recuerdo() = self.recuerdoDelAnio(anioActual)
 
-    method recuerdoDelAnio(unAnio) = if(unAnio.even()) "Bidon de petroleo" else "AK-47" 
+    method recuerdoDelAnio(unAnio) =  recuerdos.find {recuerdo => recuerdo.anioEstaDentro(unAnio)}
 
     method tieneRestriccion() = false
 

@@ -1,5 +1,6 @@
 import alambique.*
 import lugares.*
+import recuerdos.*
 describe "group of tests" {
 
   test "al inicio luke no tiene viajes" {
@@ -27,9 +28,9 @@ describe "group of tests" {
     assert.equals(buenosAires.recuerdo(), luke.ultimoRecuerdo())
   }
 
-  test "luke luego luego de ir a bagdad tiene como recuerdo un bidon de petroleo" {
+  test "luke luego luego de ir a bagdad tiene como recuerdo una bomba" {
     luke.viajarA(bagdad)
-    assert.equals("Bidon de petroleo", bagdad.recuerdo())
+    assert.equals(bomba, bagdad.recuerdo())
   }
 
   test "el alambique luego de viajar 1 vez a cada ciudad termina con 480 de combustile"{
