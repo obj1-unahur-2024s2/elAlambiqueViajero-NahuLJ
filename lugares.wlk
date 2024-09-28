@@ -5,7 +5,7 @@ object paris {
 
     method recuerdo() = "Llavero de la torre effiel"
 
-    method tieneRestriccion() = alambiqueVeloz.combustible() < self.combustible()
+    method tieneRestriccion(unVehiculo) = unVehiculo.combustible() < self.combustible()
 
     method combustible() = 200
 }
@@ -18,9 +18,9 @@ object buenosAires {
 
     method elRecuerdoTraeYerba() = presidentesConYerba.contains(presidenteActual)
 
-    method tieneRestriccion() = self.esRapido() 
+    method tieneRestriccion(unVehiculo) = self.esRapido(unVehiculo) 
 
-    method esRapido() = alambiqueVeloz.combustible() < 2 * self.combustible()
+    method esRapido(unVehiculo) = unVehiculo.combustible() < 2 * self.combustible()
 
     method combustible() = 50
 }
@@ -33,7 +33,7 @@ object bagdad {
 
     method recuerdoDelAnio(unAnio) =  recuerdos.find {recuerdo => recuerdo.anioEstaDentro(unAnio)}
 
-    method tieneRestriccion() = false
+    method tieneRestriccion(unVehiculo) = false
 
     method combustible() = 150
 }
@@ -43,7 +43,7 @@ object lasVegas {
     
     method recuerdo() = lugarConmemorado.recuerdo()
 
-    method tieneRestriccion() = lugarConmemorado.tieneRestriccion()
+    method tieneRestriccion(unVehiculo) = lugarConmemorado.tieneRestriccion(unVehiculo)
 
     method combustible() = 120
 }
@@ -52,7 +52,7 @@ object manchester {
     
     method recuerdo() = "Llavero del Manchester City"
 
-    method tieneRestriccion() = luke.ultimoRecuerdo() != "mate"
+    method tieneRestriccion(unVehiculo) = luke.ultimoRecuerdo() != "mate"
 
     method combustible() = 300
 }

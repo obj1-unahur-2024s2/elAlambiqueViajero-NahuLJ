@@ -1,7 +1,7 @@
 import alambique.*
 import lugares.*
 import recuerdos.*
-describe "group of tests" {
+describe "group of tests PARTE 1" {
 
   test "al inicio luke no tiene viajes" {
     assert.equals(0, luke.cantidadLugares())
@@ -62,4 +62,18 @@ describe "group of tests" {
     luke.viajarA(manchester)
     assert.equals("Mate", luke.ultimoRecuerdo())
   }
+}
+
+describe "group of test PARTE 2" {
+  test "si el centro verifica a el alambique veloz este es aceptado" {
+    centro.verificarVechiculo(alambiqueVeloz)
+    assert.equals([alambiqueVeloz], centro.inscriptos())
+  }
+
+  test "si el centro verifica a el superConvertible este es rechazado" {
+    centro.verificarVechiculo(superConvertible)
+    assert.equals([superConvertible], centro.rechazados())
+    assert.that(centro.inscriptos().isEmpty())
+  }
+
 }

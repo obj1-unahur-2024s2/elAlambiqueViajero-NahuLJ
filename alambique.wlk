@@ -1,3 +1,5 @@
+import lugares.*
+
 object luke {
     const property lugares = []
     var property vehiculo = alambiqueVeloz 
@@ -27,8 +29,9 @@ object alambiqueVeloz {
         combustible += unaCantidad
     }
 
-    method puedeViajarA(unLugar) = not unLugar.tieneRestriccion() and self.combustible() >= unLugar.combustible()
+    method puedeViajarA(unLugar) = not unLugar.tieneRestriccion(self) and self.combustible() >= unLugar.combustible()
 
+    method puedeInscribirseEnCiudad(unaCiudad) = self.puedeViajarA(unaCiudad)
 }   
 
 object superChatarraEspecial {
@@ -44,25 +47,32 @@ object superChatarraEspecial {
         municion += unaCantidad
     }
 
-    method puedeViajarA(unLugar) = not unLugar.tieneRestriccion() and self.combustible() >= unLugar.combustible()
+    method puedeViajarA(unLugar) = not unLugar.tieneRestriccion(self) and self.combustible() >= unLugar.combustible()
 
+    method puedeInscribirseEnCiudad(unaCiudad) = self.puedeViajarA(unaCiudad)
 }
 
 object antiguallaBlindada {
-    var cantidadGangster = 50
+    const property gangsters = ["pepe","pepita","pepona","pepe","pepote","papeto","papata"]
+    var combustible = 5000
+    
+    method combustible() = combustible
 
-    method combustible() = cantidadGangster * 5
+    method velocidad() = self.largoNombresGangsters()
+
+    method largoNombresGangsters() = gangsters.sum({gangster => gangster.length()}) 
 
     method gastarDeCombustibleCantidad(unaCantidad){
-        cantidadGangster = 0.max(cantidadGangster - unaCantidad * 0.5)
+        combustible = 0.max(combustible - unaCantidad * 0.5)
     }
 
     method cargarDeCombustibleCantidad(unaCantidad){
-        cantidadGangster += unaCantidad
+        combustible += unaCantidad
     }
 
-    method puedeViajarA(unLugar) = not unLugar.tieneRestriccion() and self.combustible() >= unLugar.combustible()
+    method puedeViajarA(unLugar) = not unLugar.tieneRestriccion(self) and self.combustible() >= unLugar.combustible()
 
+    method puedeInscribirseEnCiudad(unaCiudad) = self.puedeViajarA(unaCiudad)
 }   
 
 object superConvertible {
@@ -85,6 +95,44 @@ object superConvertible {
 
     }
 
-    method puedeViajarA(unLugar) = not estaConvertido 
+    method puedeViajarA(unLugar) = estaConvertido 
 
-}   
+    method puedeInscribirseEnCiudad(unaCiudad) = self.puedeViajarA(unaCiudad)
+
+}
+
+//PARTE 2
+object centro {
+    const property inscriptos = []
+    const property rechazados = []
+    var ciudad = buenosAires
+
+    method verificarVechiculo(unVehiculo){
+        if(unVehiculo.puedeInscribirseEnCiudad(ciudad)){
+            inscriptos.add(unVehiculo)
+        }
+        else{
+            rechazados.add(unVehiculo)
+        }
+    }
+
+    method ciudad() = ciudad
+
+    method reinscripcionEn(nuevaCiudad) {
+        ciudad = nuevaCiudad
+        self.verificarTodosLosVehiculos()
+        
+    }
+
+    method verificarTodosLosVehiculos() {
+        inscriptos.clear()
+        rechazados.clear()
+        self.todosLosVehiculos().forEach({vehiculo => self.verificarVechiculo(vehiculo)})
+    }
+
+    method todosLosVehiculos() = inscriptos + rechazados
+    
+    method iniciarCarerra() {
+        inscriptos.forEach({vehiculo => vehiculo.viajarA(ciudad)})
+    }
+}
