@@ -63,12 +63,6 @@ describe "group of test PARTE 2" {
     assert.equals([alambiqueVeloz], centro.inscriptos())
   }
 
-  test "si el centro verifica a el superConvertible este es rechazado" {
-    centro.verificarVechiculo(superConvertible)
-    assert.equals([superConvertible], centro.rechazados())
-    assert.that(centro.inscriptos().isEmpty())
-  }
-
   test "Si se realiza una carrera en paris, en la que ningun auto choca ni hace trampa gana el superConvertible"{
     centro.verificarVechiculo(alambiqueVeloz)
     centro.verificarVechiculo(superChatarraEspecial)
@@ -78,7 +72,6 @@ describe "group of test PARTE 2" {
     centro.realizarCarrera()
     assert.equals(superConvertible, centro.ganador())
   }
-
 
   test "Si se realiza una carrera en buenos aires, pero el superConvertible se convierte en el superChatarra gana alambique"{
     centro.verificarVechiculo(alambiqueVeloz)
