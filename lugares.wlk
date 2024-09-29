@@ -8,6 +8,8 @@ object paris {
     method tieneRestriccion(unVehiculo) = unVehiculo.combustible() < self.combustible()
 
     method combustible() = 200
+
+    method longitudDelCircuito() = 4000
 }
 
 object buenosAires {
@@ -23,6 +25,8 @@ object buenosAires {
     method esRapido(unVehiculo) = unVehiculo.combustible() < 2 * self.combustible()
 
     method combustible() = 50
+
+    method longitudDelCircuito() = 3020
 }
 
 object bagdad {
@@ -36,6 +40,8 @@ object bagdad {
     method tieneRestriccion(unVehiculo) = false
 
     method combustible() = 150
+
+    method longitudDelCircuito() = 3400
 }
 
 object lasVegas {
@@ -46,6 +52,8 @@ object lasVegas {
     method tieneRestriccion(unVehiculo) = lugarConmemorado.tieneRestriccion(unVehiculo)
 
     method combustible() = 120
+
+    method longitudDelCircuito() = 4900
 }
 
 object manchester {
@@ -55,4 +63,6 @@ object manchester {
     method tieneRestriccion(unVehiculo) = luke.ultimoRecuerdo() != "mate"
 
     method combustible() = 300
+
+    method longitudDelCircuito() = 2800
 }

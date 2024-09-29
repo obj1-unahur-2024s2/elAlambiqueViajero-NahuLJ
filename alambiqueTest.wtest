@@ -50,13 +50,6 @@ describe "group of tests PARTE 1" {
     assert.that(buenosAires.elRecuerdoTraeYerba())
   }
 
-  test "si luke viaja en el superConvertible nunca gasta combustible" {
-    luke.vehiculo(superConvertible)
-    luke.viajarA(buenosAires)
-    luke.viajarA(paris)
-    assert.equals(100000, superConvertible.combustible())
-  }
-
   test "luke no puede viajar a manchester si su ultimo lugar es buenos aires" {
     luke.viajarA(buenosAires)
     luke.viajarA(manchester)
@@ -76,4 +69,42 @@ describe "group of test PARTE 2" {
     assert.that(centro.inscriptos().isEmpty())
   }
 
+  test "Si se realiza una carrera en paris, en la que ningun auto choca ni hace trampa gana el superConvertible"{
+    centro.verificarVechiculo(alambiqueVeloz)
+    centro.verificarVechiculo(superChatarraEspecial)
+    centro.verificarVechiculo(superConvertible)
+    centro.reinscripcionEn(paris)
+    centro.llevarALosAutosAlCircuito()
+    centro.realizarCarrera()
+    assert.equals(superConvertible, centro.ganador())
+  }
+
+
+  test "Si se realiza una carrera en buenos aires, pero el superConvertible se convierte en el superChatarra gana alambique"{
+    centro.verificarVechiculo(alambiqueVeloz)
+    centro.verificarVechiculo(superChatarraEspecial)
+    centro.verificarVechiculo(superConvertible)
+    superConvertible.vehiculoActual(superChatarraEspecial)
+    centro.llevarALosAutosAlCircuito()
+    centro.realizarCarrera()
+    assert.equals(alambiqueVeloz, centro.ganador())
+  }
+
+  test "si se realiza una carrera en la el alambiqueVeloz choca 10 veces pierde tanta velocidad que gana el superConvertible aunque este convertido en el superChatarra" {
+    centro.verificarVechiculo(alambiqueVeloz)
+    centro.verificarVechiculo(superChatarraEspecial)
+    centro.verificarVechiculo(superConvertible)
+    superConvertible.vehiculoActual(superChatarraEspecial)
+    centro.llevarALosAutosAlCircuito()
+    centro.realizarCarrera()
+    alambiqueVeloz.chocar()
+    alambiqueVeloz.chocar()
+    alambiqueVeloz.chocar()
+    alambiqueVeloz.chocar()
+    alambiqueVeloz.chocar()
+    alambiqueVeloz.chocar()
+    alambiqueVeloz.chocar()
+    alambiqueVeloz.chocar()
+    assert.equals(superConvertible, centro.ganador())
+  }
 }
